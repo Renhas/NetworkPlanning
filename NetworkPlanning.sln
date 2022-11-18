@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32922.545
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NetworkPlanning", "NetworkPlanning\NetworkPlanning.csproj", "{52DA0674-3F43-4422-BA1F-6E6D978C9D90}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "Graph\Graph.csproj", "{D0C293D6-955B-428C-AC4A-EAD4EE107558}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company", "Company\Company.csproj", "{417C0A99-0018-45B9-94F3-459E4C4DAAB5}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{52DA0674-3F43-4422-BA1F-6E6D978C9D90}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{52DA0674-3F43-4422-BA1F-6E6D978C9D90}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{52DA0674-3F43-4422-BA1F-6E6D978C9D90}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{52DA0674-3F43-4422-BA1F-6E6D978C9D90}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D0C293D6-955B-428C-AC4A-EAD4EE107558}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D0C293D6-955B-428C-AC4A-EAD4EE107558}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D0C293D6-955B-428C-AC4A-EAD4EE107558}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D0C293D6-955B-428C-AC4A-EAD4EE107558}.Release|Any CPU.Build.0 = Release|Any CPU
+		{417C0A99-0018-45B9-94F3-459E4C4DAAB5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{417C0A99-0018-45B9-94F3-459E4C4DAAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{417C0A99-0018-45B9-94F3-459E4C4DAAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{417C0A99-0018-45B9-94F3-459E4C4DAAB5}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {BA28CA38-F871-4711-A5B3-A265E9D01A43}
+	EndGlobalSection
+EndGlobal
