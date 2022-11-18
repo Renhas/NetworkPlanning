@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MyResources;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,33 +7,51 @@ using System.Threading.Tasks;
 
 namespace Graph
 {
-    public class GraphNode
+    public class GraphNode : IComparable<GraphNode>
     {
         public List<GraphNode> Next;
         public List<GraphNode> Prev;
 
-        readonly public int ResourceType;
+        public int StartTime;
+        public int EndTime;
+        public bool Done { get; private set; }
+        private int _remainingResource;
+        public int RemainingResource 
+        {
+            get { return _remainingResource; }
+            set 
+            {
+                if (value < 0 || value > ResourceIntensity) throw new ArgumentOutOfRangeException();
+                if (value == 0) Done = true;
+                else Done = false;
+                _remainingResource = value;
+                
+            }
+        }
+        
+        readonly public Resource Resource;
         readonly public int ResourceIntensity;
         readonly public int WorkIntensity;
 
         readonly public int Id;
-        readonly public int? StartTime;
+        readonly public int? EntryTime;
         readonly public int? Directive;
 
-        public GraphNode(int id, int resourceType, int resourceIntensity, int workIntensity, int? startTime = null, int? directive = null) 
+        public GraphNode(int id, int resourceIntensity, int workIntensity, Resource resource, int? startTime = null, int? directive = null) 
         {
-            if (id < 1 || resourceType < 1 || resourceIntensity < 1 || workIntensity < 1) throw new ArgumentException("Некорректные данные!");
+            if (id < 1 || resourceIntensity < 1 || workIntensity < 1) throw new ArgumentException("Некорректные данные!");
             Id = id;
-            ResourceType = resourceType;
             ResourceIntensity = resourceIntensity;
             WorkIntensity = workIntensity;
             if (startTime != null && startTime < 1) throw new ArgumentException("Некорректные данные!");
-            StartTime = startTime;
+            EntryTime = startTime;
             if (directive != null && directive < 1) throw new ArgumentException("Некорректные данные!");
             Directive = directive;
             Next = new List<GraphNode>();
             Prev = new List<GraphNode>();
-
+            Resource = resource;
+            StartTime = EndTime = 0;
+            RemainingResource = resourceIntensity;
         }
 
         public int CalculateTimeReserve() 
@@ -51,7 +70,7 @@ namespace Graph
                 }
                 return max;
             }
-            else if (StartTime != null) return (int)StartTime;
+            else if (EntryTime != null) return (int)EntryTime;
             else throw new ArgumentException("Не задано время поступления в систему");
         }
 
@@ -94,11 +113,16 @@ namespace Graph
                 foreach (GraphNode node in Prev) prev += $"{node.Id}, ";
                 prev = prev.Remove(prev.Length - 2) + "], ";
             }
-            if (StartTime != null) startTime = $", время поступления в систему = {StartTime}";
+            if (EntryTime != null) startTime = $", время поступления в систему = {EntryTime}";
             if (Directive != null) directive = $", директивный срок = {Directive}";
             return $"{Id}: {next}{prev}" +
-                $"тип ресурса = {ResourceType}, интенсивность = {WorkIntensity}, ресурсоёмкость = {ResourceIntensity}, " +
+                $"ресурс = {Resource.Id}, интенсивность = {WorkIntensity}, ресурсоёмкость = {ResourceIntensity}, " +
                 $"резерв времени = {CalculateTimeReserve()}{startTime}{directive}";
+        }
+
+        public int CompareTo(GraphNode other)
+        {
+            return Id.CompareTo(other.Id);
         }
     }
 }

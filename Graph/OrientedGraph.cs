@@ -79,6 +79,28 @@ namespace Graph
 
         }
 
+        public List<GraphNode> ToList() 
+        {
+            List<GraphNode> nodes = new List<GraphNode>();
+
+            void Add(GraphNode node) 
+            {
+                nodes.Add(node);
+            }
+            Seek(Add);
+
+            return nodes;
+        }
+
+        public List<GraphNode> ToSortedList() 
+        {
+            List<GraphNode> nodes = ToList();
+
+            nodes.Sort(new GraphNodesComparer());
+
+            return nodes;
+        }
+
         public override string ToString()
         {
             string result = $"Изделие {ProductName}\n";

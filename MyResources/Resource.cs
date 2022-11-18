@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace CompanyNamespace
+namespace MyResources
 {
     public class Resource
     {
@@ -30,7 +30,7 @@ namespace CompanyNamespace
 
         public override string ToString()
         {
-            return $"Ресурс #{Id}: {PerTact} за один такт, {Count} текущее количество";
+            return $"Ресурс #{Id}: {PerTact} за один такт, {Count} сейчас есть";
         }
     }
 }

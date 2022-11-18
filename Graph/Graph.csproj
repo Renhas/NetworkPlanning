@@ -42,8 +42,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="GraphNode.cs" />
+    <Compile Include="GraphNodesComparer.cs" />
     <Compile Include="OrientedGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\MyResources\MyResources.csproj">
+      <Project>{9408e683-7e55-4c07-b502-9bbbf23ea9d5}</Project>
+      <Name>MyResources</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

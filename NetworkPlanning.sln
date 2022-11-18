@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Graph", "Graph\Graph.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Company", "Company\Company.csproj", "{417C0A99-0018-45B9-94F3-459E4C4DAAB5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MyResources", "MyResources\MyResources.csproj", "{9408E683-7E55-4C07-B502-9BBBF23EA9D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +29,10 @@ Global
 		{417C0A99-0018-45B9-94F3-459E4C4DAAB5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{417C0A99-0018-45B9-94F3-459E4C4DAAB5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{417C0A99-0018-45B9-94F3-459E4C4DAAB5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9408E683-7E55-4C07-B502-9BBBF23EA9D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9408E683-7E55-4C07-B502-9BBBF23EA9D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9408E683-7E55-4C07-B502-9BBBF23EA9D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9408E683-7E55-4C07-B502-9BBBF23EA9D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
