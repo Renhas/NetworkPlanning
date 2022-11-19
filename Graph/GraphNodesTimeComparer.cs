@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace Graph
 {
-    public class GraphNodesIdComparer : IComparer<GraphNode>
+    public class GraphNodesTimeComparer : IComparer<GraphNode>
     {
         public int Compare(GraphNode x, GraphNode y)
         {
-            return x.CompareTo(y);
+            return x.TimeReserve - y.TimeReserve;
         }
     }
 }

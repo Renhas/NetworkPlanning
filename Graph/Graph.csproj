@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="GraphNode.cs" />
     <Compile Include="GraphNodesComparer.cs" />
+    <Compile Include="GraphNodesTimeComparer.cs" />
     <Compile Include="OrientedGraph.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

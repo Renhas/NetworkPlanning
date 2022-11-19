@@ -96,7 +96,7 @@ namespace Graph
         {
             List<GraphNode> nodes = ToList();
 
-            nodes.Sort(new GraphNodesComparer());
+            nodes.Sort(new GraphNodesIdComparer());
 
             return nodes;
         }
@@ -104,12 +104,10 @@ namespace Graph
         public override string ToString()
         {
             string result = $"Изделие {ProductName}\n";
-
-            void StringNode(GraphNode node) 
+            foreach (var node in ToSortedList()) 
             {
                 result += node.ToString() + "\n";
             }
-            Seek(StringNode);
             return result;
         }
 

@@ -1,5 +1,6 @@
 ﻿using MyResources;
 using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -7,25 +8,28 @@ using System.Threading.Tasks;
 
 namespace Graph
 {
-    public class GraphNode : IComparable<GraphNode>
+    public class GraphNode : IComparable<GraphNode>, ICloneable
     {
         public List<GraphNode> Next;
         public List<GraphNode> Prev;
 
         public int StartTime;
-        public int EndTime;
-        public bool Done { get; private set; }
-        private int _remainingResource;
-        public int RemainingResource 
+        public int EndTime 
         {
-            get { return _remainingResource; }
-            set 
+            get { return StartTime + WorkTime - 1; }   
+        }
+        public int WorkTime
+        {
+            get { return (int)Math.Ceiling((float)ResourceIntensity / WorkIntensity); }
+        }
+
+        private int? _reserve;
+        public int TimeReserve 
+        {
+            get 
             {
-                if (value < 0 || value > ResourceIntensity) throw new ArgumentOutOfRangeException();
-                if (value == 0) Done = true;
-                else Done = false;
-                _remainingResource = value;
-                
+                if (_reserve == null) _reserve = CalculateTimeReserve();
+                return _reserve.Value;
             }
         }
         
@@ -33,33 +37,44 @@ namespace Graph
         readonly public int ResourceIntensity;
         readonly public int WorkIntensity;
 
+
         readonly public int Id;
         readonly public int? EntryTime;
         readonly public int? Directive;
 
-        public GraphNode(int id, int resourceIntensity, int workIntensity, Resource resource, int? startTime = null, int? directive = null) 
+        public GraphNode(int id, int resourceIntensity, int workIntensity, 
+            Resource resource, int? entryTime = null, int? directive = null) 
         {
-            if (id < 1 || resourceIntensity < 1 || workIntensity < 1) throw new ArgumentException("Некорректные данные!");
+            if (id < 1 || resourceIntensity < 1 || workIntensity < 1)
+                throw new ArgumentException("Некорректные данные!");
             Id = id;
             ResourceIntensity = resourceIntensity;
             WorkIntensity = workIntensity;
-            if (startTime != null && startTime < 1) throw new ArgumentException("Некорректные данные!");
-            EntryTime = startTime;
-            if (directive != null && directive < 1) throw new ArgumentException("Некорректные данные!");
+            if (entryTime != null && entryTime < 1 ||
+                directive != null && directive < 1)
+                throw new ArgumentException("Некорректные данные!");
+            EntryTime = entryTime;
             Directive = directive;
             Next = new List<GraphNode>();
             Prev = new List<GraphNode>();
             Resource = resource;
-            StartTime = EndTime = 0;
-            RemainingResource = resourceIntensity;
+            StartTime = 0;
+
         }
 
-        public int CalculateTimeReserve() 
+        public void ResetReserve() => _reserve = null;
+        public void Work(int tact) 
+        {
+            if (Resource.Count < ResourceIntensity) return;
+            StartTime = tact;
+            Resource.Count -= ResourceIntensity;
+        }
+        private int CalculateTimeReserve() 
         {
             return LateEnd() - EarlyEnd();
         }
 
-        public int EarlyStart()
+        private int EarlyStart()
         {
             if (Prev.Any())
             {
@@ -74,17 +89,17 @@ namespace Graph
             else throw new ArgumentException("Не задано время поступления в систему");
         }
 
-        public int EarlyEnd() 
+        private int EarlyEnd() 
         {
-            return EarlyStart() + (int)Math.Ceiling((float)ResourceIntensity / WorkIntensity) - 1;
+            return EarlyStart() + WorkTime - 1;
         }
 
-        public int LateStart() 
+        private int LateStart() 
         {
-            return LateEnd() - (int)Math.Ceiling((float)ResourceIntensity / WorkIntensity) + 1;
+            return LateEnd() - WorkTime + 1;
         }
 
-        public int LateEnd() 
+        private int LateEnd() 
         {
             if (Next.Any())
             {
@@ -116,13 +131,25 @@ namespace Graph
             if (EntryTime != null) startTime = $", время поступления в систему = {EntryTime}";
             if (Directive != null) directive = $", директивный срок = {Directive}";
             return $"{Id}: {next}{prev}" +
-                $"ресурс = {Resource.Id}, интенсивность = {WorkIntensity}, ресурсоёмкость = {ResourceIntensity}, " +
-                $"резерв времени = {CalculateTimeReserve()}{startTime}{directive}";
+                $"ресурс = {Resource.Id}, интенсивность = {WorkIntensity}, " +
+                $"ресурсоёмкость = {ResourceIntensity}, " +
+                $"время работы = {WorkTime}, " +
+                $"резерв времени = {TimeReserve}{startTime}{directive}";
         }
 
         public int CompareTo(GraphNode other)
         {
             return Id.CompareTo(other.Id);
+        }
+
+        public object Clone() 
+        {
+            GraphNode newNode = new GraphNode(Id, ResourceIntensity, WorkIntensity, Resource, EntryTime, Directive);
+            foreach (var next in Next) newNode.Next.Add(next);
+            foreach (var prev in Prev) newNode.Prev.Add(prev);
+            newNode.StartTime = StartTime;
+            newNode._reserve = _reserve;
+            return newNode;
         }
     }
 }
