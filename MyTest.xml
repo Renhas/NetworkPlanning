@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Company>
+	<Products>
+		<Product name="A">
+			<Job id = "1">
+				<Next>
+					<id>2</id>
+					<id>3</id>
+				</Next>
+				<Intensivity>10</Intensivity>
+				<Resource>1</Resource>
+				<ResIntens>35</ResIntens>
+				<StartTime>1</StartTime>
+			</Job>
+			<Job id = "2">
+				<Next>
+					<id>4</id>
+				</Next>
+				<Intensivity>12</Intensivity>
+				<Resource>2</Resource>
+				<ResIntens>48</ResIntens>
+			</Job>
+			<Job id = "3">
+				<Next>
+					<id>5</id>
+				</Next>
+				<Intensivity>3</Intensivity>
+				<Resource>1</Resource>
+				<ResIntens>7</ResIntens>
+			</Job>
+			<Job id = "4">
+				<Next>
+					<id>6</id>
+				</Next>
+				<Intensivity>5</Intensivity>
+				<Resource>1</Resource>
+				<ResIntens>23</ResIntens>
+			</Job>
+			<Job id = "5">
+				<Next>
+					<id>6</id>
+				</Next>
+				<Intensivity>20</Intensivity>
+				<Resource>2</Resource>
+				<ResIntens>56</ResIntens>
+			</Job>
+			<Job id = "6">
+				<Intensivity>15</Intensivity>
+				<Resource>1</Resource>
+				<ResIntens>103</ResIntens>
+				<Directive>36</Directive>
+			</Job>
+		</Product>
+	</Products>
+	<Resources>
+		<Resource id = "1">100</Resource>
+		<Resource id = "2">50</Resource>
+	</Resources>
+</Company>
