@@ -34,8 +34,6 @@ namespace CompanyNamespace
                 }
             }
             return tact - 1;
-
-            
         }
 
         static List<GraphNode> ConstructFront(int tact) 

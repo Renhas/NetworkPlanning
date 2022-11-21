@@ -45,8 +45,7 @@ namespace CompanyNamespace
             foreach (XElement element in product.Elements("Job")) 
             {
 
-                if (graph.Root == null) graph.Root = ReadJob(element, product, graph, company);
-                else ReadJob(element, product, graph, company);
+                ReadJob(element, product, graph, company);
             }
             return graph;
         }
@@ -65,6 +64,7 @@ namespace CompanyNamespace
             if (job.Element("Directive") != null) directive = int.Parse(job.Element("Directive").Value);
             Resource resource = company.GetResource(int.Parse(job.Element("Resource").Value));
             node = new GraphNode(id, resIntens, workIntens, resource, startTime, directive);
+            if(graph.Root == null) graph.Root = node;
 
             if (job.Element("Next") == null) return node;
             foreach (var next in job.Element("Next").Elements("id")) 
